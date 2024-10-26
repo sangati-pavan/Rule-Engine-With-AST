@@ -1,0 +1,147 @@
+Rule Engine with AST
+
+Table of Contents :
+
+   1. Introduction
+   2. Features
+   3. Technologies Used
+   4. Project Structure
+   5. Getting Started
+   6. Usage
+   7. API Endpoints
+   8. Sample Rules
+   9. Testing
+   10. Future Improvements
+
+1. Introduction :
+   This Rule Engine project is a 3-tier application that allows dynamic creation, modification, and evaluation of conditional rules using an Abstract Syntax Tree (AST). It assesses user eligibility based on attributes like age, department, income, and experience, enabling complex, nested conditions for precise cohort definitions.
+
+2. Features :
+
+    Dynamic Rule Creation and Management:  Create, edit, delete, and combine complex rules.
+    AST Representation:  Parse conditional rules into an AST structure for efficient evaluation.
+    Rule Modification:  Modify rules dynamically, adjusting operators, conditions, and values.
+    Real-time Rule Testing:  Test rules with sample data instantly in the UI.
+    Rule Export/Import:  Export rules as JSON/CSV and import them for sharing or backup.
+    Custom Functions:  Define custom functions in rules for more nuanced evaluations.
+    Error Handling:  Clear feedback for syntax errors or unsupported operators.
+
+3. Technologies Used :
+
+    Frontend: React, Material UI
+    Backend: Node.js, Express
+    Database: MongoDB (for rule storage and metadata)
+    Language: JavaScript (ES6)
+    Other: Axios (for API calls), Mocha (for testing)
+
+4. Project Structure :
+
+    rule-engine-ast/
+    ├── backend/
+    │   ├── controllers/
+    │   │   └── ruleController.js        # Main logic for rule handling
+    │   ├── models/
+    │   │   └── Rule.js                  # MongoDB schema for rules
+    │   ├── routes/
+    │   │   └── ruleRoutes.js            # API routes for rules
+    │   ├── app.js                       # Express server setup
+    │   └── server.js                    # Server entry point
+    ├── frontend/
+    │   ├── src/
+    │   │   ├── components/
+    │   │   │   └── RuleForm.js          # Form for creating and editing rules
+    │   │   │   └── RuleEvaluator.js     # Real-time rule evaluation component
+    │   │   └── App.js                   # Main React component
+    │   └── public/
+    │       └── index.html
+    ├── README.md
+    └── package.json
+
+5. Getting Started :
+
+ 5.1 Prerequisites :
+
+    Node.js and npm
+    MongoDB (or MongoDB Atlas for cloud setup)
+
+ 5.2 Installation :
+
+    Clone the repository:
+
+        git clone https://github.com/pavan-sangati/Rule-Engine-With-AST.git
+
+    Install backend dependencies:
+
+        cd backend
+        npm install
+
+    Install frontend dependencies:
+
+        cd ../frontend
+        npm install
+
+    Set up environment variables:
+
+        In the backend directory, create a .env file:
+            PORT=5000
+            MONGO_URI=your_mongodb_connection_string
+            
+    Running the Application :
+
+        Start MongoDB (skip if using MongoDB Atlas).
+            mongod
+
+    Start the backend server:
+
+        cd backend
+        npm start
+
+    Start the frontend application:
+
+        cd frontend
+        npm start
+
+The application will be available at http://localhost:3000 for the frontend, and the backend will run on http://localhost:5000.
+
+6. Usage :
+
+    Create Rules: Use the UI to enter and submit new rules. The backend will parse the rule string into an AST and store it.
+    Evaluate Rules: Test rules by inputting sample data, and get real-time feedback on eligibility.
+    Modify and Manage: Edit, delete, and view the details of stored rules directly from the interface.
+    Export/Import Rules: Use JSON/CSV options to backup rules or import new sets.
+
+7. API Endpoints :
+
+    7.1 Rule Endpoints :
+
+        Endpoint	       Method	   Description
+        /api/rules/create	POST	 Create a new rule
+        /api/rules/combine	POST	 Combine multiple rules into one AST
+        /api/rules/evaluate	POST	 Evaluate a rule against sample data
+        /api/rules/update	PUT	     Update an existing rule
+        /api/rules/:id	   DELETE	 Delete a specific rule
+
+8. Sample Rules :
+
+    Rule 1: ((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)
+    Rule 2: ((age > 30 AND department = 'Marketing')) AND (salary > 20000 OR experience > 5)
+    The rules above can be created and tested within the app’s UI. Input sample data and see if the conditions hold true for eligibility.
+
+9. Testing :
+
+    9.1 Run Tests:
+
+        Backend tests are included using Mocha. Run them as follows:
+
+            cd backend
+            npm test
+
+    9.2 Test Cases:
+
+        Create rules with valid and invalid syntax, combining rules, and evaluating sample data against rule logic.
+
+10. Future Improvements :
+
+    User Authentication: Secure rule management with user roles and permissions.
+    Rule Weighting: Add weight values for rule components to impact final eligibility scoring.
+    Nested Custom Functions: Support for advanced user-defined functions for enhanced conditional logic.
